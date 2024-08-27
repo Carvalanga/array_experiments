@@ -1,18 +1,24 @@
 #include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
-
+#include <string.h>
 
 #include "matrix_func.h"
 
-void print_rect_mathix(int* arr, size_t x_size, size_t y_size) {
-    for (int x = 0; x < x_size; x++) {
-        for (int y = 0; y < y_size; y++) {
+void print_rect_mathix(double* arr, size_t x_size, size_t y_size) {
+
+    printf("\n"
+           "#  Your rectangle matrix:"
+           "\n");
+
+    for (size_t y = 0; y < y_size; y++) {
+        printf("\t");
+        for (size_t x = 0; x < x_size; x++) {
 
             assert(x < x_size);
             assert(y < y_size);
 
-            printf("%-3d ", *(arr + x * y_size + y ));
+            printf("%-3lg ", *(arr + x * y_size + y ));
 
             /*неверный ввод *(arr + x_size * y_size + y_size))*/
 
@@ -21,13 +27,19 @@ void print_rect_mathix(int* arr, size_t x_size, size_t y_size) {
     }
 }
 
-void print_triangle_matrix(int* arr, size_t num_count) {
+void print_triangle_matrix(double* arr, size_t num_count) {
 
-    for (int i = 0; i < num_count; i++) {
+    printf("\n"
+           "# Your triangle matrix:"
+           "\n");
 
-        for (int j = 0; j <= i; j++) {
+    for (size_t i = 0; i < num_count; i++) {
 
-            printf("%-3d ", *(arr + j + arith_prog(1, i, i)));
+        printf("\t");
+
+        for (size_t j = 0; j <= i; j++) {
+
+            printf("%-3lg ", *(arr + j + arith_prog(1, i, i)));
             num_count--;
 
         }
