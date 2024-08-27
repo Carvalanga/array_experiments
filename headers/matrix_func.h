@@ -3,6 +3,5 @@
 
 void print_rect_mathix(double* arr, size_t x_size, size_t y_size);
 void print_triangle_matrix(double* arr, size_t len);
-int arith_prog(int first_memb, int last_memb, int count_memb);
 
 #endif //MATRIX_FUNC_H

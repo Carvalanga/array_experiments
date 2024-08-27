@@ -39,15 +39,18 @@ void print_triangle_matrix(double* arr, size_t num_count) {
 
         for (size_t j = 0; j <= i; j++) {
 
-            printf("%-3lg ", *(arr + j + arith_prog(1, i, i)));
+            printf("%-3lg ", *(arr++));
             num_count--;
 
         }
 
         printf("\n");
     }
-}
 
-int arith_prog(int first_memb, int last_memb, int count_memb) {
-    return (first_memb + last_memb) * count_memb / 2;
+    printf("\t");
+
+    for (; num_count > 0; num_count--) {
+        printf("%-3lg ", *(arr++));
+    }
+
 }
