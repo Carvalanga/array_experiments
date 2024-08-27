@@ -13,6 +13,7 @@ double* input_matrix(int* x, int* y) {
     double* ptr = matrix_ptr;
 
     for (; val_count > 0; val_count--) {
+
         scanf("%lg", ptr++);
     }
 
