@@ -3,22 +3,20 @@
 
 #include "matrix_func.h"
 #include "input_matrix.h"
+#include "command_line.h"
+#include "help.h"
 
-int main() {
+int main(int argc, char* argv[]) {
 
-    int matrix_size_x = 1;
-    int matrix_size_y = 1;
+    MODES mode = HELP;
 
-    double* ptr = input_matrix(&matrix_size_x, &matrix_size_y);
-    int num_cnt = matrix_size_x * matrix_size_y;
-    int max_num_len = check_max_num_len(ptr, num_cnt);
+    if (argc != 2){
+        printf("# Too few or too much arguments, check the help:\n\n");
+    }
 
-    print_rect_mathix(ptr, matrix_size_x,
-                           matrix_size_y,
-                           max_num_len);
+    else {
+        mode = arg_check(argv[1]);
+    }
 
-    print_triangle_matrix(ptr, num_cnt, max_num_len);
-
-    free(ptr);
-
+    return start_program(mode);
 }

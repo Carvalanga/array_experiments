@@ -4,25 +4,30 @@
 #include <math.h>
 
 #include "matrix_func.h"
+#include "input_matrix.h"
+#include "matrix_struct.h"
 
-void print_rect_mathix(double* arr, size_t x_size, size_t y_size, int max_num_len) {
+void print_rect_matrix(MATRIX* mtrx) {
+
+    int max_num_len = check_max_num_len(mtrx->matrix, mtrx->size_x * mtrx->size_y);
 
     printf("\n"
-           "#  Your rectangle matrix:"
+           "# Your matrix:"
            "\n");
 
-    for (size_t y = 0; y < y_size; y++) {
+    for (int y = 0; y < mtrx->size_y; y++) {
+
         printf("\t");
-        for (size_t x = 0; x < x_size; x++) {
 
-            assert(x < x_size);
-            assert(y < y_size);
+        for (int x = 0; x < mtrx->size_x; x++) {
 
-            printf("%-*lg ", max_num_len, *(arr + x * y_size + y ));
+            assert(x < mtrx->size_x && x >= 0);
+            assert(y < mtrx->size_y && y >= 0);
 
-            /*неверный ввод *(arr + x_size * y_size + y_size))*/
+            printf("%-*lg ", max_num_len, *(mtrx->matrix + x * mtrx->size_y + y ));
 
         }
+
         printf("\n");
     }
 }
@@ -61,3 +66,60 @@ int check_max_num_len(double* ptr_cp, int num_cnt) {
     }
     return mx_len+2;
 }
+
+int sum_matrix() {
+
+    int x_size = 1, y_size = 1;
+
+    input_matrix_size(&x_size,
+                      &y_size);
+
+    MATRIX m1 = {}, m2 = {};
+
+    m1.size_x = x_size;
+    m1.size_y = y_size;
+
+    m2.size_x = x_size;
+    m2.size_y = y_size;
+
+    matrix_init(&m1);
+    matrix_init(&m2);
+
+    for     (int x = 0; x < x_size; x++) {
+        for (int y = 0; y < y_size; y++) {
+
+            *(m1.matrix + x * m1.size_y + y) +=
+            *(m2.matrix + x * m2.size_y + y);
+
+            printf("%lg\n",*(m1.matrix + x * y_size + y));
+        }
+    }
+
+    print_rect_matrix(&m1);
+    free(m1.matrix);
+    free(m2.matrix);
+    return 0;
+}
+
+//int mult_matrix () {
+//    MATRIX m1 = {}, m2 = {};
+//
+//    input_matrix_size(&m1.size_x,
+//                      &m1.size_y);
+//
+//    input_matrix_size(&m2.size_x,
+//                      &m2.size_y);
+//
+//    if (!check_correct_matrix_input(
+//    m1.size_x,
+//    m1.size_y,
+//    m2.size_x,
+//    m2.size_y) {
+//
+//        printf("ERROR: INCORRET MATRIX INPUT\n");
+//
+//    }
+//
+//    for
+//}
+

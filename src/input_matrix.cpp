@@ -3,20 +3,24 @@
 
 #include "input_matrix.h"
 
-double* input_matrix(int* x, int* y) {
+void input_matrix_size(int* x, int* y) {
+    printf("# Input count of cols:\n");
+    scanf("%i", x);
 
-    scanf("%i %i", x, y);
+    printf("# Input count of rows:\n");
+    scanf("%i", y);
+}
 
-    int val_count = (*x) * (*y);
+void matrix_init(MATRIX* m) {
 
-    double* matrix_ptr = (double*)calloc(val_count, sizeof(double));
-    double* ptr = matrix_ptr;
+    int val_count = m->size_x * m->size_y;
+    m->matrix = (double*)calloc(val_count, sizeof(double));
 
+    double* ptr = m->matrix;
+
+    printf("# Input data for matrix:");
     for (; val_count > 0; val_count--) {
 
         scanf("%lg", ptr++);
     }
-
-    return(matrix_ptr);
-
 }
