@@ -37,7 +37,7 @@ int start_program(MODES md) {
             return sum_matrix();
 
         case MULT:
-            return -1;
+            return mult_matrix();
 
         case SHOW:
             return -1;

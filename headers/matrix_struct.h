@@ -1,10 +1,12 @@
 #ifndef MATRIX_STRUCT_H
 #define MATRIX_STRUCT_H
 
+#include <stdlib.h>
+
 struct MATRIX {
-    int size_x = 1;
-    int size_y = 1;
-    double* matrix = NULL;
+    int cols;
+    int rows;
+    double* matrix;
 };
 
 #endif //MATRIX_STRUCT_H

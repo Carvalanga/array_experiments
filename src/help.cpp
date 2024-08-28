@@ -3,7 +3,7 @@
 #include "help.h"
 
 int help() {
-    printf("# Input arguments:\n"
+    printf("# Input only ONE argument:\n"
            "-s - matrix addition\n"
            "-m - matrix multiplication\n"
            "-p - input and print your matrix\n"
