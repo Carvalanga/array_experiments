@@ -7,20 +7,29 @@
 #include "matrix_struct.h"
 #include "output_matrix.h"
 
+static void make_matrix_for_calculation(MATRIX* m);
+
+static void make_matrix_for_calculation(MATRIX* m) {
+    input_matrix_size(&m->cols, &m->rows);
+    matrix_init(m);
+}
+
 int sum_matrix() {
-
-    int cols = 1, rows = 1;
-
-    input_matrix_size(&cols,
-                      &rows);
 
     MATRIX m1 = {}, m2 = {};
 
-    m1.cols = m2.cols = cols;
-    m1.rows = m2.rows = rows;
+    make_matrix_for_calculation(&m1);
+    make_matrix_for_calculation(&m2);
 
-    matrix_init(&m1);
-    matrix_init(&m2);
+    if (m1.cols != m2.cols ||
+        m1.rows != m2.rows) {
+            printf("ERROR: INCORRET MATRIX INPUT\n");
+            return -1;
+        }
+
+    int cols = m1.cols;
+    int rows = m1.rows;
+
 
     for     (int col = 0;  col < cols; col++) {
         for (int row = 0; row < rows; row++) {
@@ -39,11 +48,8 @@ int sum_matrix() {
 int mult_matrix() {
     MATRIX m1 = {}, m2 = {}, m_res = {};
 
-    input_matrix_size(&m1.cols,
-                      &m1.rows);
-
-    input_matrix_size(&m2.cols,
-                      &m2.rows);
+    make_matrix_for_calculation(&m1);
+    make_matrix_for_calculation(&m2);
 
     if (m1.cols != m2.rows) {
 
@@ -55,11 +61,6 @@ int mult_matrix() {
     m_res.cols = m2.cols;
     m_res.rows = m1.rows;
 
-    matrix_init(&m1);
-    matrix_init(&m2);
-
-    print_rect_matrix(&m1);
-
     m_res.matrix = (double*)calloc(m_res.cols * m_res.rows, sizeof(double));
 
     for (int row = 0; row < m_res.rows; row++) {
@@ -67,12 +68,12 @@ int mult_matrix() {
 
             double tmp = 0;
 
-            for (int epsilone = 0; epsilone < m1.cols; epsilone++) {
-                tmp += *(m1.matrix + row * m1.cols + epsilone) *
-                       *(m2.matrix + epsilone * m2.cols + col);
+            for (int offset = 0; offset < m1.cols; offset++) {
+                tmp += *(m1.matrix + row    * m1.cols + offset) *
+                       *(m2.matrix + offset * m2.cols + col);
             }
 
-            *(m_res.matrix + row * m_res.cols + col) = tmp;
+            *(m_res.matrix + col * m_res.rows + row) = tmp;
 
         }
     }
@@ -83,5 +84,12 @@ int mult_matrix() {
     free(m1.matrix);
     free(m2.matrix);
 
+    return 0;
+}
+
+int show_user_matrix() {
+    MATRIX m = {};
+    make_matrix_for_calculation(&m);
+    print_rect_matrix(&m);
     return 0;
 }

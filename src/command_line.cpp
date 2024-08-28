@@ -23,6 +23,10 @@ MODES arg_check(char* arg) {
         return HELP;
     }
 
+    else if (strcmp(arg, "-t") == 0) {
+        return TORN;
+    }
+
     else
         printf("# Incorrect argument: check the help:\n\n");
         return HELP;
@@ -40,11 +44,13 @@ int start_program(MODES md) {
             return mult_matrix();
 
         case SHOW:
-            return -1;
+            return show_user_matrix();
 
         case HELP:
             return help();
 
+        case TORN:
+            return -1;
         default:
             printf("# ERROR: INCORRECT MODE");
             return -1;

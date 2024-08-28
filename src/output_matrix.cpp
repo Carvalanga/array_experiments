@@ -10,11 +10,11 @@ void print_rect_matrix(MATRIX* mtrx) {
     printf("\n"
            "# Your matrix:"
            "\n");
-    for (int col = 0; col < mtrx->cols; col++) {
+    for (int row = 0; row < mtrx->rows; row++) {
 
         printf("\t");
 
-        for (int row = 0; row < mtrx->rows; row++) {
+        for (int col = 0; col < mtrx->cols; col++) {
 
             assert(col < mtrx->cols && col >= 0);
             assert(row < mtrx->rows && row >= 0);

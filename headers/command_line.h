@@ -5,7 +5,8 @@ enum MODES {
     SUM,
     MULT,
     SHOW,
-    HELP
+    HELP,
+    TORN
 };
 
 MODES arg_check(char* arg);

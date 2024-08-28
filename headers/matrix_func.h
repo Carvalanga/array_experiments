@@ -3,6 +3,7 @@
 
 #include "matrix_struct.h"
 
+int show_user_matrix();
 int sum_matrix();
 int mult_matrix();
 
